@@ -76,7 +76,7 @@ public class EnemyHealth : NetworkBehaviour
         GetComponent <UnityEngine.AI.NavMeshAgent> ().enabled = false;
         GetComponent <Rigidbody> ().isKinematic = true;
         isSinking = true;
-        ScoreManager.score += scoreValue;
+        GameObject.FindObjectOfType<ScoreManager>().score += scoreValue;
         Destroy (gameObject, 2f);
     }
 }

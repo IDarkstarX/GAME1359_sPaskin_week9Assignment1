@@ -5,8 +5,8 @@ using Mirror;
 
 public class ScoreManager : NetworkBehaviour
 {
-    public static int score;
-
+    [SyncVar]
+    public int score;
 
     Text text;
 

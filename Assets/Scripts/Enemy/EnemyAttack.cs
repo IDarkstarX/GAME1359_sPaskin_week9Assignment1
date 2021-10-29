@@ -15,7 +15,7 @@ public class EnemyAttack : NetworkBehaviour
     PlayerHealth playerHealth;
 
     Dictionary<GameObject, bool> PML;
-
+    [SyncVar]
     Transform currentTarget;
 
     EnemyHealth enemyHealth;
@@ -31,25 +31,6 @@ public class EnemyAttack : NetworkBehaviour
         anim = GetComponent <Animator> ();
         PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
     }
-
-
-    void OnTriggerEnter (Collider other)
-    {
-        if(other.gameObject == currentTarget)
-        {
-            playerInRange = true;
-        }
-    }
-
-
-    void OnTriggerExit (Collider other)
-    {
-        if(other.gameObject == currentTarget)
-        {
-            playerInRange = false;
-        }
-    }
-
 
     void Update ()
     {
@@ -84,6 +65,23 @@ public class EnemyAttack : NetworkBehaviour
         if(playerHealth.currentHealth <= 0)
         {
             anim.SetTrigger ("PlayerDead");
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == currentTarget)
+        {
+            playerInRange = true;
+        }
+    }
+
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == currentTarget)
+        {
+            playerInRange = false;
         }
     }
 

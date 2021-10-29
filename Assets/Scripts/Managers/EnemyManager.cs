@@ -7,7 +7,7 @@ public class EnemyManager : NetworkBehaviour
     PlayerHealth playerHealth;
 
     Dictionary<GameObject, bool> PML;
-
+    [SyncVar]
     Transform currentTarget;
 
     public GameObject enemy;
@@ -47,7 +47,7 @@ public class EnemyManager : NetworkBehaviour
     void Spawn ()
     {
 
-        if (!isServer) return;
+        //if (!isServer) return;
 
         if(playerHealth.currentHealth <= 0f)
         {

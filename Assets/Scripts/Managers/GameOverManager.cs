@@ -24,15 +24,21 @@ public class GameOverManager : NetworkBehaviour
     {
         if (PML != null)
         {
-            if (playerHealth.currentHealth <= 0)
+            foreach (var i in PML)
             {
-                anim.SetTrigger("GameOver");
 
-                restartTimer += Time.deltaTime;
+                playerHealth = i.Key.GetComponent<PlayerHealth>();
 
-                if (restartTimer >= restartDelay)
+                if (playerHealth.currentHealth <= 0)
                 {
-                    Application.LoadLevel(Application.loadedLevel);
+                    anim.SetTrigger("GameOver");
+
+                    restartTimer += Time.deltaTime;
+
+                    if (restartTimer >= restartDelay)
+                    {
+                        Application.LoadLevel(Application.loadedLevel);
+                    }
                 }
             }
         } else

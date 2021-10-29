@@ -8,6 +8,7 @@ public class EnemyMovement : NetworkBehaviour
     //Transform player;
     PlayerHealth playerHealth;
 
+    [SyncVar]
     Transform currentTarget;
 
     Dictionary<GameObject, bool> PML;
