@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 526740744}
   m_Layer: 0
   m_Name: PLAYERMASTERLIST
-  m_TagString: player master list
+  m_TagString: Player Master List
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

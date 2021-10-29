@@ -18,11 +18,12 @@ public class EnemyManager : NetworkBehaviour
     void Start ()
     {
         InvokeRepeating ("Spawn", spawnTime, spawnTime);
-        PML = GameObject.Find("Player Master List").GetComponent<PlayerMasterList>().playerList;
+        PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
     }
 
     private void Update()
     {
+        
         float shortestDist = float.MaxValue;
         if (PML != null)
         {
@@ -37,6 +38,9 @@ public class EnemyManager : NetworkBehaviour
                     shortestDist = dist;
                 }
             }
+        } else
+        {
+            PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
         }
     }
 
@@ -53,5 +57,7 @@ public class EnemyManager : NetworkBehaviour
         int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
         Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+
+        NetworkServer.Spawn(enemy);
     }
 }

@@ -29,7 +29,7 @@ public class EnemyAttack : NetworkBehaviour
         //playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator> ();
-        PML = GameObject.Find("Player Master List").GetComponent<PlayerMasterList>().playerList;
+        PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
     }
 
 
@@ -53,6 +53,7 @@ public class EnemyAttack : NetworkBehaviour
 
     void Update ()
     {
+
         float shortestDist = float.MaxValue;
         if (PML != null)
         {
@@ -67,6 +68,10 @@ public class EnemyAttack : NetworkBehaviour
                     shortestDist = dist;
                 }
             }
+        }
+        else
+        {
+            PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
         }
 
         timer += Time.deltaTime;

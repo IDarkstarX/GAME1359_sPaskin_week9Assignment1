@@ -5,7 +5,7 @@ using Mirror;
 
 public class PlayerMasterList : NetworkBehaviour
 {
-
+    
     public Dictionary<GameObject, bool> playerList = new Dictionary<GameObject, bool>();
 
     void Start()
@@ -24,22 +24,28 @@ public class PlayerMasterList : NetworkBehaviour
     void OnPlayerConnected(NetworkIdentity player)
     {
         Debug.Log("Player " + " connected from " + player.netId);
-        playerList.Add(player.gameObject, true);
+        //playerList.Add(player.gameObject, true);
     }
 }
 
 /*
    float shortestDist = float.MaxValue;
-   foreach (var i in PML)
+        if (PML != null)
         {
-            float dist = Vector3.Distance(this.transform.position, i.Key.transform.position);
-
-            if (dist < shortestDist)
+            foreach (var i in PML)
             {
-                currentTarget = i.Key.transform;
-                playerHealth = currentTarget.GetComponent<PlayerHealth>();
-                shortestDist = dist;
+                float dist = Vector3.Distance(this.transform.position, i.Key.transform.position);
+
+                if (dist < shortestDist)
+                {
+                    currentTarget = i.Key.transform;
+                    playerHealth = currentTarget.GetComponent<PlayerHealth>();
+                    shortestDist = dist;
+                }
             }
+        } else
+        {
+            PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
         }
 
     [SerializeField]

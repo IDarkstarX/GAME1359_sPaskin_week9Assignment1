@@ -16,21 +16,28 @@ public class GameOverManager : NetworkBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        PML = GameObject.Find("Player Master List").GetComponent<PlayerMasterList>().playerList;
+        PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
     }
 
 
     void Update()
     {
-        if (playerHealth.currentHealth <= 0)
+        if (PML != null)
         {
-            anim.SetTrigger("GameOver");
+            if (playerHealth.currentHealth <= 0)
+            {
+                anim.SetTrigger("GameOver");
 
-			restartTimer += Time.deltaTime;
+                restartTimer += Time.deltaTime;
 
-			if (restartTimer >= restartDelay) {
-				Application.LoadLevel(Application.loadedLevel);
-			}
+                if (restartTimer >= restartDelay)
+                {
+                    Application.LoadLevel(Application.loadedLevel);
+                }
+            }
+        } else
+        {
+            PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
         }
     }
 }

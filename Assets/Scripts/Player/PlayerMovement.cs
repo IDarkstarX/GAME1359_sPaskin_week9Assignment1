@@ -16,6 +16,9 @@ public class PlayerMovement : NetworkBehaviour
 		floorMask = LayerMask.GetMask("Floor");
 		anim = GetComponent<Animator>();
 		playerRigidbody = GetComponent<Rigidbody>();
+
+		FindObjectOfType<PlayerMasterList>().playerList.Add(gameObject, true);
+
 	}
 
 	void FixedUpdate()

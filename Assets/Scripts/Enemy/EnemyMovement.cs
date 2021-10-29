@@ -22,7 +22,7 @@ public class EnemyMovement : NetworkBehaviour
         //playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent <EnemyHealth> ();
         nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
-        PML = GameObject.Find("Player Master List").GetComponent<PlayerMasterList>().playerList;
+        PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
     }
 
 
@@ -43,6 +43,10 @@ public class EnemyMovement : NetworkBehaviour
                     shortestDist = dist;
                 }
             }
+        }
+        else
+        {
+            PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
         }
 
         if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
