@@ -4,11 +4,9 @@ using Mirror;
 
 public class EnemyManager : NetworkBehaviour
 {
-    PlayerHealth playerHealth;
+    //PlayerHealth playerHealth;
 
     Dictionary<GameObject, bool> PML;
-    [SyncVar]
-    Transform currentTarget;
 
     public GameObject enemy;
     public float spawnTime = 3f;
@@ -21,43 +19,28 @@ public class EnemyManager : NetworkBehaviour
         PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
     }
 
-    private void Update()
+    void Spawn ()
     {
-        
-        float shortestDist = float.MaxValue;
+        if (!isServer) return;
+
         if (PML != null)
         {
             foreach (var i in PML)
             {
-                float dist = Vector3.Distance(this.transform.position, i.Key.transform.position);
-
-                if (dist < shortestDist)
+                if (i.Key.GetComponent<PlayerHealth>().currentHealth <= 0f || !i.Value)
                 {
-                    currentTarget = i.Key.transform;
-                    playerHealth = currentTarget.GetComponent<PlayerHealth>();
-                    shortestDist = dist;
+                    return;
                 }
             }
-        } else
+        }
+        else
         {
             PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
         }
-    }
-
-    void Spawn ()
-    {
-
-        //if (!isServer) return;
-
-        if(playerHealth.currentHealth <= 0f)
-        {
-            return;
-        }
-
+        
         int spawnPointIndex = Random.Range (0, spawnPoints.Length);
 
-        Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-
-        NetworkServer.Spawn(enemy);
+        GameObject g = Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        NetworkServer.Spawn(g);
     }
 }

@@ -39,24 +39,24 @@ public class PlayerShooting : NetworkBehaviour
         
 		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
-            CmdShoot ();
+            Shoot ();
         }
 
         if(timer >= timeBetweenBullets * effectsDisplayTime)
         {
-            CmdDisableEffects ();
+            DisableEffects ();
         }
     }
 
     [Command]
-    public void CmdDisableEffects ()
+    public void DisableEffects ()
     {
         gunLine.enabled = false;
         gunLight.enabled = false;
     }
 
     [Command]
-    void CmdShoot ()
+    void Shoot ()
     {
         timer = 0f;
 

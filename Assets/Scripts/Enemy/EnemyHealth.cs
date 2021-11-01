@@ -78,5 +78,6 @@ public class EnemyHealth : NetworkBehaviour
         isSinking = true;
         GameObject.FindObjectOfType<ScoreManager>().score += scoreValue;
         Destroy (gameObject, 2f);
+        NetworkServer.Destroy(gameObject);
     }
 }

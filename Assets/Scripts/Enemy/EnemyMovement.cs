@@ -15,7 +15,7 @@ public class EnemyMovement : NetworkBehaviour
 
     EnemyHealth enemyHealth;
     UnityEngine.AI.NavMeshAgent nav;
-
+    float dist;
 
     void Start()
     {
@@ -31,13 +31,17 @@ public class EnemyMovement : NetworkBehaviour
     {
 
         float shortestDist = float.MaxValue;
+        
         if (PML != null)
         {
             foreach (var i in PML)
             {
-                float dist = Vector3.Distance(this.transform.position, i.Key.transform.position);
+                if (i.Value)
+                {
+                    dist = Vector3.Distance(this.transform.position, i.Key.transform.position);
+                }
 
-                if (dist < shortestDist)
+                if (dist < shortestDist && i.Value)
                 {
                     currentTarget = i.Key.transform;
                     playerHealth = currentTarget.GetComponent<PlayerHealth>();

@@ -394,7 +394,7 @@ MonoBehaviour:
   onlineScene: 
   transport: {fileID: 619818402}
   networkAddress: localhost
-  maxConnections: 4
+  maxConnections: 10
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 1873466918661584, guid: 9e3e72cd89ef44f97afe08f9baaabc18,
     type: 3}
@@ -936,10 +936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7d881b999e84dd9b2a355ed698e352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  target: {fileID: 0}
-  smoothing: 5
+  playerTransform: {fileID: 0}
+  depth: -20
 --- !u!1 &1962775784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  score: 0
 --- !u!114 &2045715845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1296,7 +1295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 4242337701
-  serverOnly: 0
+  serverOnly: 1
   visible: 0
   m_AssetId: 
   hasSpawned: 0

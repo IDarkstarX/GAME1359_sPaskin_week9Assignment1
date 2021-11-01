@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Mirror;
+using UnityEngine.SceneManagement;
 
 public class GameOverManager : NetworkBehaviour
 {
@@ -12,6 +13,7 @@ public class GameOverManager : NetworkBehaviour
     Animator anim;
 	float restartTimer;
 
+    public int deadPlayers = 0;
 
     void Start()
     {
@@ -22,28 +24,17 @@ public class GameOverManager : NetworkBehaviour
 
     void Update()
     {
-        if (PML != null)
+        Debug.Log("Dead players: "+deadPlayers+ " - Total players: " + PML.Count);
+        
+
+        if (deadPlayers >= PML.Count)
         {
-            foreach (var i in PML)
+            restartTimer += Time.deltaTime;
+            Debug.Log("ENDING GAME!");
+            if (restartTimer >= restartDelay)
             {
-
-                playerHealth = i.Key.GetComponent<PlayerHealth>();
-
-                if (playerHealth.currentHealth <= 0)
-                {
-                    anim.SetTrigger("GameOver");
-
-                    restartTimer += Time.deltaTime;
-
-                    if (restartTimer >= restartDelay)
-                    {
-                        Application.LoadLevel(Application.loadedLevel);
-                    }
-                }
+                SceneManager.LoadScene(0);
             }
-        } else
-        {
-            PML = GameObject.FindGameObjectWithTag("Player Master List").GetComponent<PlayerMasterList>().playerList;
         }
     }
 }

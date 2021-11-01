@@ -15,8 +15,9 @@ public class EnemyAttack : NetworkBehaviour
     PlayerHealth playerHealth;
 
     Dictionary<GameObject, bool> PML;
+
     [SyncVar]
-    Transform currentTarget;
+    GameObject currentTarget;
 
     EnemyHealth enemyHealth;
     bool playerInRange;
@@ -40,13 +41,16 @@ public class EnemyAttack : NetworkBehaviour
         {
             foreach (var i in PML)
             {
-                float dist = Vector3.Distance(this.transform.position, i.Key.transform.position);
-
-                if (dist < shortestDist)
+                if (this != null)
                 {
-                    currentTarget = i.Key.transform;
-                    playerHealth = currentTarget.GetComponent<PlayerHealth>();
-                    shortestDist = dist;
+                    float dist = Vector3.Distance(this.transform.position, i.Key.transform.position);
+
+                    if (dist < shortestDist)
+                    {
+                        currentTarget = i.Key.gameObject;
+                        playerHealth = currentTarget.GetComponent<PlayerHealth>();
+                        shortestDist = dist;
+                    }
                 }
             }
         }
@@ -75,7 +79,7 @@ public class EnemyAttack : NetworkBehaviour
             playerInRange = true;
         }
     }
-
+    
 
     void OnTriggerExit(Collider other)
     {

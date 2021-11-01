@@ -1,23 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Mirror;
+﻿using UnityEngine;
 
-public class CameraFollow : NetworkBehaviour
+public class CameraFollow : MonoBehaviour
 {
-	public Transform target;
-	public float smoothing = 5f;
+    public Transform playerTransform;
+    public int depth = -22;
 
-	private Vector3 offset;
+    // Update is called once per frame
+    void Update()
+    {
+        if (playerTransform != null)
+        {
+            transform.position = playerTransform.position + new Vector3(0, 15, depth);
+        }
+    }
 
-	void Start()
-	{
-		offset = transform.position - target.position;
-	}
-
-	void FixedUpdate()
-	{
-		Vector3 targetCamPos = target.position + offset;
-		transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
-	}
+    public void setTarget(Transform target)
+    {
+        playerTransform = target;
+    }
 }

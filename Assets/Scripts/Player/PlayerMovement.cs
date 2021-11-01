@@ -11,6 +11,11 @@ public class PlayerMovement : NetworkBehaviour
 	private int floorMask;
 	private float camRayLength = 100f;
 
+	public override void OnStartLocalPlayer()
+	{
+		Camera.main.GetComponent<CameraFollow>().setTarget(gameObject.transform);
+	}
+
 	void Awake()
 	{
 		floorMask = LayerMask.GetMask("Floor");
