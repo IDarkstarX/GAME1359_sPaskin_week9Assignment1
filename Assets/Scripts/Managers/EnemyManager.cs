@@ -27,10 +27,12 @@ public class EnemyManager : NetworkBehaviour
         {
             foreach (var i in PML)
             {
+                /*
                 if (i.Key.GetComponent<PlayerHealth>().currentHealth <= 0f || !i.Value)
                 {
                     return;
                 }
+                */
             }
         }
         else

@@ -65,11 +65,12 @@ public class EnemyAttack : NetworkBehaviour
         {
             Attack ();
         }
-
+        /*
         if(playerHealth.currentHealth <= 0)
         {
             anim.SetTrigger ("PlayerDead");
         }
+        */
     }
 
     void OnTriggerEnter(Collider other)
